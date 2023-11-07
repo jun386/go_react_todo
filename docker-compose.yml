@@ -1,0 +1,39 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    container_name: go_react_todo_frontend
+    tty: true
+    volumes:
+      - ./frontend:/app
+    command: sh -c "cd react-app && yarn start"
+    ports:
+      - 3000:3000
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: go_react_todo_backend
+    ports:
+      - 8080:8080
+    tty: true
+    volumes:
+      - ./backend:/app
+    environment:
+      POSTGRES_USER: go_react_todo
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: go_react_todo
+      POSTGRES_HOST: dockerPOSTGRES
+  postgres:
+    image: postgres:15.4-alpine
+    container_name: dockerPOSTGRES
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: go_react_todo
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: go_react_todo
+      TZ: 'Asia/Tokyo'
+    restart: always
