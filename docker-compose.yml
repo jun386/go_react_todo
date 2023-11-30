@@ -8,6 +8,7 @@ services:
     tty: true
     volumes:
       - ./frontend/react-app:/app
+      - node-modules:/app/node_modules
     command: sh -c "yarn start"
     ports:
       - 3000:3000
@@ -37,3 +38,5 @@ services:
       POSTGRES_DB: go_react_todo
       TZ: 'Asia/Tokyo'
     restart: always
+volumes:
+  node-modules:
