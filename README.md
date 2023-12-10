@@ -33,6 +33,8 @@ docker compose run --rm backend go run migrate/migrate.go
 docker compose up -d
 ```
 
+- localhost:3000 にアクセスする。
+
 ### 使用技術
 - Golang 1.21.2
 - Echo 4.11.2
